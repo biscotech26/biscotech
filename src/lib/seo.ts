@@ -36,9 +36,9 @@ export const siteConfig = {
     "BiscoTech is a digital agency in Enugu, Nigeria, for web and app development, branding, digital marketing and SEO, with an Academy teaching digital skills.",
   email: CONTACT_EMAIL,
   // Shown on the Contact page and used in the structured data. Keep them identical everywhere.
-  phone: { display: "+234 707 6546 314", tel: "+2347076546314" },
+  phone: { display: "0806 373 3157", tel: "+2348063733157" },
   // Opens a chat with the same number in the WhatsApp app (phones) or WhatsApp Web (computers)
-  whatsapp: "https://wa.me/2347076546314",
+  whatsapp: "https://wa.me/2348063733157",
   address,
   socialLinks,
   // The profiles search engines tie to the business (structured data sameAs)

@@ -3,7 +3,7 @@ import { pageJsonLd, pageMetadata } from "@/lib/seo";
 import ContactHero from "./_components/contactHero";
 
 const description =
-  "Visit BiscoTech in Independence Layout, Enugu, call +234 707 6546 314, or tell us about your project and let's start a conversation.";
+  "Visit BiscoTech in Independence Layout, Enugu, call 0806 373 3157, or tell us about your project and let's start a conversation.";
 
 export const metadata = pageMetadata({
   title: "Contact Us: Start Your Project",

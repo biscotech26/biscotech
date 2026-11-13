@@ -21,6 +21,8 @@ const values = [
   },
 ];
 
+const slides = [1, 2, 3, 4].map((n) => `/img/team_slide_${n}.jpeg`);
+
 export default function LittleAboutBisco() {
   return (
     <section className="bg-main-background py-16 lg:py-24">
@@ -79,14 +81,26 @@ export default function LittleAboutBisco() {
           </ul>
         </div>
 
+        {/* Four photos in a row, listed twice and slid left by one copy, so they scroll
+            right to left forever without a jump */}
         <div className="relative aspect-1200/658 w-full overflow-hidden rounded-sm">
-          <Image
-            src="/img/team-meeting.png"
-            alt="A team meeting around a table in a bright office"
-            fill
-            sizes="(min-width: 1440px) 75rem, 83vw"
-            className="object-cover"
-          />
+          <div className="absolute inset-y-0 left-0 flex w-[800%] motion-safe:animate-marquee">
+            {[...slides, ...slides].map((src, i) => (
+              <div
+                key={i}
+                className="relative h-full w-[12.5%] shrink-0"
+                aria-hidden={i >= slides.length}
+              >
+                <Image
+                  src={src}
+                  alt={i < slides.length ? `BiscoTech team photo ${i + 1}` : ""}
+                  fill
+                  sizes="(min-width: 1440px) 75rem, 83vw"
+                  className="object-cover"
+                />
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </section>
