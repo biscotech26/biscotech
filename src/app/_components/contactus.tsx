@@ -52,11 +52,13 @@ export default function ContactUs() {
             <a
               href={`mailto:${CONTACT_EMAIL}`}
               className={cn(
-                "inline-flex items-center gap-2 py-3 text-primary-brand",
+                "group inline-flex items-center gap-2 py-3 text-primary-brand",
                 variantStyles.primaryButton,
               )}
             >
-              {CONTACT_EMAIL}
+              <span className="underline-offset-4 group-hover:underline">
+                {CONTACT_EMAIL}
+              </span>
               <DarkArrowRightUp />
             </a>
           </div>
