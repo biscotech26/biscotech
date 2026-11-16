@@ -4,7 +4,7 @@ import { variantStyles } from "@/components/ui/typography";
 // Shared by every inquiry form (home "Let's talk" section, Contact page).
 // Plain module (no "use client") so both server and client components can import it.
 
-export const CONTACT_EMAIL = "hello@bisco.com";
+export const CONTACT_EMAIL = "info@biscotech.org";
 
 export const services = [
   "Website design & dev",

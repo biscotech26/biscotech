@@ -53,11 +53,13 @@ export default function ContactHero() {
               <a
                 href={`mailto:${CONTACT_EMAIL}`}
                 className={cn(
-                  "inline-flex items-center gap-2 py-3 text-primary-brand",
+                  "group inline-flex items-center gap-2 py-3 text-primary-brand",
                   variantStyles.primaryButton,
                 )}
               >
-                {CONTACT_EMAIL}
+                <span className="underline-offset-4 group-hover:underline">
+                  {CONTACT_EMAIL}
+                </span>
                 <DarkArrowRightUp />
               </a>
             </li>
@@ -68,11 +70,13 @@ export default function ContactHero() {
               <a
                 href={`tel:${siteConfig.phone.tel}`}
                 className={cn(
-                  "inline-flex items-center gap-2 py-3 text-primary-brand",
+                  "group inline-flex items-center gap-2 py-3 text-primary-brand",
                   variantStyles.primaryButton,
                 )}
               >
-                {siteConfig.phone.display}
+                <span className="underline-offset-4 group-hover:underline">
+                  {siteConfig.phone.display}
+                </span>
                 <DarkArrowRightUp />
               </a>
             </li>

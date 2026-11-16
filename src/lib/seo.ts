@@ -10,7 +10,7 @@ const siteUrl =
     : "https://www.biscotech.org";
 
 const address = {
-  street: "No. 8 Anjali Crescent, Independence Layout",
+  street: "No. 8 Ajali Crescent, Independence Layout",
   city: "Enugu",
   state: "Enugu State",
   countryCode: "NG",
