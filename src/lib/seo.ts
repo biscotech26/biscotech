@@ -25,6 +25,9 @@ const socialLinks = {
   tiktok: "https://www.tiktok.com/@bisco.tech",
 };
 
+// Google Business Profile share link
+const googleProfileUrl = "https://share.google/FoUrkkJch7EK2olUS";
+
 export const siteConfig = {
   name: "BiscoTech",
   url: siteUrl,
@@ -42,12 +45,10 @@ export const siteConfig = {
   address,
   socialLinks,
   // The profiles search engines tie to the business (structured data sameAs)
-  socials: Object.values(socialLinks).filter(Boolean),
-  // A Google Maps search for the address (Contact page "Visit us" and the structured data).
-  // Swap in the Google Business Profile share link if there is one.
-  mapsUrl: `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
-    `${address.street}, ${address.city}, ${address.country}`,
-  )}`,
+  socials: [...Object.values(socialLinks).filter(Boolean), googleProfileUrl],
+  // The Google Business Profile (reviews, hours, directions): Contact page "Visit us" and the
+  // structured data's hasMap
+  mapsUrl: googleProfileUrl,
   // Google needs a logo of at least 112×112px; Logo.png is only 60×71
   logo: "/img/LogoLarge.png",
   keywords: [
