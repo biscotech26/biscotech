@@ -84,12 +84,12 @@ export default function ContactHero() {
               <Typography variant="primaryButton" as="p" className="text-primary-brand">
                 VISIT US
               </Typography>
-              {/* Opens Google Maps (the app on phones) with a pin on the office */}
+              {/* Opens the Google Business Profile (directions, reviews, hours) */}
               <a
                 href={siteConfig.mapsUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label={`Open ${fullAddress} in Google Maps`}
+                aria-label={`${fullAddress}: open BiscoTech on Google for directions`}
                 className="group inline-flex items-start gap-2 text-text-charcoal"
               >
                 <Typography
