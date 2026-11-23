@@ -130,6 +130,20 @@
       transform: none;
     }
   }
+
+  /* Form error toast dropping in from the top */
+  --animate-toast-in: toast-in 0.3s ease-out both;
+
+  @keyframes toast-in {
+    from {
+      opacity: 0;
+      transform: translateY(-0.75rem);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
 }
 
 /* Content width used by every section. Phones: 20px side gutters (like most modern sites).
