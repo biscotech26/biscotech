@@ -109,7 +109,8 @@ export default async function CoursePage({ params }: PageProps<"/academy/[slug]"
             label={details.cta.label}
             {...ctaTitleParts(details.cta.title)}
             description={details.cta.description}
-            action={{ label: details.cta.action, href: "/contact" }}
+            // "Register course" opens the registration form with this course already chosen
+            action={{ label: details.cta.action, href: `/academy/register?course=${course.slug}` }}
           />
         ) : (
           // Courses without a full package yet
@@ -119,7 +120,7 @@ export default async function CoursePage({ params }: PageProps<"/academy/[slug]"
             highlight="new door."
             titleAfter=""
             description={`Have a question about ${course.title}, or want to save your spot? Tell us a little about yourself and we'll take it from there.`}
-            action={{ label: "Register your interest", href: "/contact" }}
+            action={{ label: "Register your interest", href: `/academy/register?course=${course.slug}` }}
           />
         )}
       </section>

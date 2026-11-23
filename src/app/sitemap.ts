@@ -7,6 +7,8 @@ const routes = [
   { path: "", priority: 1 },
   { path: "/services", priority: 0.9 },
   { path: "/academy", priority: 0.8 },
+  // The registration form (its checkout and invoice steps stay out of search)
+  { path: "/academy/register", priority: 0.7 },
   { path: "/about", priority: 0.8 },
   { path: "/our_process", priority: 0.7 },
   { path: "/contact", priority: 0.8 },

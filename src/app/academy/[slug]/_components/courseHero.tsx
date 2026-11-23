@@ -1,7 +1,7 @@
 import Button from "@/components/ui/button";
 import { ArrowUpEnd } from "@/components/ui/reusable/svg";
 import Typography from "@/components/ui/typography";
-import { FEES_TBA, SHOW_PRICES, type Course } from "@/lib/courses";
+import { formatNaira, trainingModes, type Course } from "@/lib/courses";
 import { cn } from "@/lib/utils";
 
 // Course name with the last word in teal Newsreader italic: Product *Design* (Figma)
@@ -79,14 +79,33 @@ export default function CourseHero({ course }: { course: Course }) {
               details?.narrowFeeCard && "min-[90rem]:mr-12 min-[90rem]:flex-[0_1_26rem]",
             )}
           >
-            <div className="flex flex-col gap-2.5">
+            {/* The fee for each way of taking the course (official fee list): three across, each
+                name with its price under it, like the facts below */}
+            <div className="flex flex-col gap-4">
               <Typography variant="primaryButton" as="p" className="text-text-charcoal">
                 Course fee
               </Typography>
-              {/* Figma: 320px wide, so the fees note breaks onto two lines */}
-              <Typography variant="subHeading" as="p" className="text-primary-brand lg:max-w-80">
-                {SHOW_PRICES && course.price ? course.price : FEES_TBA}
-              </Typography>
+              <dl className="grid grid-cols-3 gap-3">
+                {trainingModes.map((mode) => (
+                  <div key={mode.id} className="flex flex-col gap-1.5">
+                    <dt>
+                      <Typography variant="body" as="span" className="text-text-charcoal">
+                        {mode.short}
+                      </Typography>
+                    </dt>
+                    <dd>
+                      <Typography
+                        variant="cardHeading"
+                        as="span"
+                        // 13px on narrow phones so three prices fit across; Figma's 20px on laptop
+                        className="whitespace-nowrap text-[0.8125rem] text-primary-brand sm:text-base lg:text-xl"
+                      >
+                        {formatNaira(course.fees[mode.id])}
+                      </Typography>
+                    </dd>
+                  </div>
+                ))}
+              </dl>
             </div>
 
             {facts.length > 0 && (
