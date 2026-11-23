@@ -16,7 +16,7 @@ export default function Footer() {
   return (
     // Course pages swap this for their small copyright row
     <FooterRow courseSlugs={courses.map((course) => course.slug)}>
-    <footer className="bg-primary-brand pt-8 pb-4 text-cards-and-sections md:pt-10.25 md:pb-4.5">
+    <footer className="bg-primary-brand pt-8 pb-4 text-cards-and-sections md:pt-10.25 md:pb-4.5 print:hidden">
       <div className="mx-auto page-container">
         <div className="flex flex-col items-start gap-4 md:flex-row md:justify-between md:gap-8">
           {/* Logo on a white tile (smaller on phones) */}

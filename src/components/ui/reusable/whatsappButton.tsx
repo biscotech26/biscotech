@@ -97,7 +97,7 @@ export default function WhatsAppButton() {
       onPointerCancel={onPointerUp}
       style={position ?? undefined}
       // touch-none: dragging on a phone moves the button instead of scrolling the page
-      className={`fixed z-50 flex size-14 cursor-grab touch-none items-center justify-center rounded-full bg-primary-brand text-cards-and-sections shadow-[0_0.75rem_1.75rem_-0.5rem_rgba(18,63,58,0.6)] transition-[scale,box-shadow] duration-300 select-none hover:scale-105 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-light-teal active:cursor-grabbing md:size-15 ${position ? "" : "right-5 bottom-5 md:right-8 md:bottom-8"}`}
+      className={`fixed z-50 flex size-14 cursor-grab print:hidden touch-none items-center justify-center rounded-full bg-primary-brand text-cards-and-sections shadow-[0_0.75rem_1.75rem_-0.5rem_rgba(18,63,58,0.6)] transition-[scale,box-shadow] duration-300 select-none hover:scale-105 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-light-teal active:cursor-grabbing md:size-15 ${position ? "" : "right-5 bottom-5 md:right-8 md:bottom-8"}`}
     >
       {/* WhatsApp logo */}
       <svg viewBox="0 0 24 24" aria-hidden="true" className="size-7 md:size-8" fill="currentColor">

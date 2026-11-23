@@ -18,7 +18,7 @@ export default function Header() {
     // Tighter padding on phones; Figma spacing from md.
     <header
       data-site-header
-      className="sticky top-0 z-40 mx-auto w-full border-b border-[#000000] bg-transparent py-3 transition-[background-color,box-shadow] duration-300 data-[scrolled=true]:bg-main-background data-[scrolled=true]:bg-[linear-gradient(var(--hero-bg,transparent),var(--hero-bg,transparent))] data-[scrolled=true]:shadow-sm md:pt-4.75 md:pb-7"
+      className="sticky top-0 z-40 mx-auto w-full print:hidden border-b border-[#000000] bg-transparent py-3 transition-[background-color,box-shadow] duration-300 data-[scrolled=true]:bg-main-background data-[scrolled=true]:bg-[linear-gradient(var(--hero-bg,transparent),var(--hero-bg,transparent))] data-[scrolled=true]:shadow-sm md:pt-4.75 md:pb-7"
     >
       <HeaderOffset />
       {/* Course pages swap this for their simpler logo + "Back to Academy" row */}

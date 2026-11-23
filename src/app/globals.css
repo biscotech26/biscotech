@@ -60,6 +60,18 @@
   }
 }
 
+/* Printing (the invoice): no page margin, so the browser leaves out its date/title/URL lines,
+   and the body supplies the margin instead */
+@media print {
+  @page {
+    margin: 0;
+  }
+  body {
+    padding: 14mm 16mm;
+    background: #fff;
+  }
+}
+
 /* The north-star icon turning slowly (one turn every 8s), wherever it appears */
 @utility animate-star-spin {
   animation: star-spin 8s linear infinite;

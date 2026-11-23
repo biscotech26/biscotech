@@ -7,6 +7,7 @@ import Button from "../button";
 import { usePathname } from "next/navigation";
 import { ArrowUpEnd, BackArrow, ChevronDown } from "./svg";
 import { cn } from "@/lib/utils";
+import SocialLinks from "./socialLinks";
 
 // Course pages (/academy/<course>) use Figma's simpler header: just the logo and a link back
 // to the Academy (44px above the logo, 31px below). Every other page keeps the full header,
@@ -21,7 +22,11 @@ export function HeaderRow({
 }) {
   const pathName = usePathname();
   const isCoursePage = courseSlugs.some((slug) => pathName === `/academy/${slug}`);
-  if (!isCoursePage) return children;
+  // The registration pages (form, checkout, invoice) use the same simple header
+  const isRegister = pathName.startsWith("/academy/register");
+  if (!isCoursePage && !isRegister) return children;
+  // Figma: checkout offers "Cancel" instead
+  const isCheckout = pathName === "/academy/register/checkout";
 
   return (
     <div className="page-container flex items-start justify-between gap-6 md:pt-6.25 md:pb-0.75">
@@ -37,7 +42,7 @@ export function HeaderRow({
       </Link>
 
       <Link
-        href="/academy#courses"
+        href={isCheckout ? "/academy" : "/academy#courses"}
         className="group flex items-center gap-1 text-text-charcoal transition-colors hover:text-light-teal md:gap-2"
       >
         <BackArrow className="size-5 transition-[translate] duration-300 motion-safe:group-hover:-translate-x-1 md:size-6" />
@@ -46,7 +51,7 @@ export function HeaderRow({
           as="span"
           className="py-2.5 text-sm md:text-base"
         >
-          Back to Academy
+          {isCheckout ? "Cancel" : "Back to Academy"}
         </Typography>
       </Link>
     </div>
@@ -64,10 +69,32 @@ export function FooterRow({
 }) {
   const pathName = usePathname();
   const isCoursePage = courseSlugs.some((slug) => pathName === `/academy/${slug}`);
+
+  // Registration pages: Figma's dark footer with the logo tile, a tagline and the social icons
+  if (pathName.startsWith("/academy/register")) {
+    return (
+      <footer className="bg-primary-brand py-8 text-cards-and-sections md:py-10 print:hidden">
+        <div className="page-container flex flex-col items-start gap-6 md:flex-row md:items-center md:justify-between">
+          <Link
+            href="/"
+            aria-label="BiscoTech home"
+            className="flex h-15 w-16 shrink-0 items-center justify-center rounded-2xl bg-cards-and-sections md:h-20 md:w-21.5 md:rounded-[1.25rem]"
+          >
+            <Image src="/img/Logo.svg" alt="BiscoTech" width={60} height={71} className="h-auto w-11 md:w-15" />
+          </Link>
+          <Typography variant="contactHeader" as="p" className="max-w-54">
+            Skills today. Better opportunities tomorrow
+          </Typography>
+          <SocialLinks className="[&_svg]:w-7 lg:[&_svg]:w-10" />
+        </div>
+      </footer>
+    );
+  }
+
   if (!isCoursePage) return children;
 
   return (
-    <footer className="bg-main-background pb-5.5">
+    <footer className="bg-main-background pb-5.5 print:hidden">
       <div className="page-container flex flex-wrap items-center gap-x-0.75">
         <Typography variant="body" as="p" className="text-text-charcoal">
           &copy; {new Date().getFullYear()} BiscoTech Academy
@@ -200,6 +227,18 @@ function AcademyMenu({
             >
               <Typography variant="primaryButton" as="span" className="text-light-teal">
                 View all courses
+              </Typography>
+              <ArrowUpEnd className="size-4 text-light-teal" />
+            </Link>
+          </li>
+          <li>
+            <Link
+              href="/academy/register"
+              onClick={close}
+              className="flex items-center justify-between rounded-[0.5rem] px-3 py-2.5 transition-colors duration-200 hover:bg-secondary-accent/50"
+            >
+              <Typography variant="primaryButton" as="span" className="text-light-teal">
+                Register for a course
               </Typography>
               <ArrowUpEnd className="size-4 text-light-teal" />
             </Link>
@@ -357,6 +396,17 @@ export function MobileMenu({ courses }: { courses: NavCourse[] }) {
                         </li>
                       );
                     })}
+                    <li>
+                      <Link
+                        href="/academy/register"
+                        onClick={() => setOpen(false)}
+                        className="block rounded-[0.5rem] px-3 py-2.5 transition-colors duration-200 hover:bg-secondary-accent/50"
+                      >
+                        <Typography variant="primaryButton" as="span" className="text-light-teal">
+                          Register for a course
+                        </Typography>
+                      </Link>
+                    </li>
                   </ul>
                 )}
               </div>
