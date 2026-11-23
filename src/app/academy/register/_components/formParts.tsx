@@ -8,9 +8,9 @@ import { InfoIcon } from "./registerIcons";
 // Shared pieces of the registration and checkout forms, styled like the site's other forms
 // (Figma: white field, sage border, 20px corners, 66px tall; Manrope bold labels with a *).
 
-const fieldBox =
+export const fieldBox =
   "flex w-full items-center gap-2.5 rounded-[1.25rem] border border-secondary-accent bg-cards-and-sections px-5 transition-[border-color,box-shadow] duration-300 focus-within:border-light-teal focus-within:ring-4 focus-within:ring-light-teal/15 hover:border-light-teal/60 md:px-6";
-const fieldText = cn(
+export const fieldText = cn(
   variantStyles.cardHeading,
   "w-full min-w-0 bg-transparent py-3.5 text-primary-brand outline-none placeholder:text-secondary-accent md:py-4.25",
 );

@@ -15,13 +15,13 @@ import {
 } from "@/lib/registration";
 import { cn } from "@/lib/utils";
 import { PrivacyNote, RadioMark, SelectField, StepTitle, TextField } from "./formParts";
+import CountryField from "./countryField";
 import RegisterHero from "./registerHero";
 import {
   BankIcon,
   BookIcon,
   CapIcon,
   CheckCircleFilledIcon,
-  GlobeIcon,
   HomeIcon,
   LaptopIcon,
   MailIcon,
@@ -170,15 +170,10 @@ export default function RegisterFlow({
                       value={data.phone}
                       onChange={(e) => update({ phone: e.target.value })}
                     />
-                    <TextField
+                    <CountryField
                       id="country"
-                      label="Country of residence"
-                      placeholder="Enter country"
-                      autoComplete="country-name"
-                      icon={<GlobeIcon />}
-                      className="md:col-span-2"
                       value={data.country}
-                      onChange={(e) => update({ country: e.target.value })}
+                      onChange={(country) => update({ country })}
                     />
                   </div>
                 </>
