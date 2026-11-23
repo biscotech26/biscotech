@@ -129,22 +129,7 @@
       opacity: 1;
       transform: none;
     }
-  }
-
-  /* Form error toast dropping in from the top */
-  --animate-toast-in: toast-in 0.3s ease-out both;
-
-  @keyframes toast-in {
-    from {
-      opacity: 0;
-      transform: translateY(-0.75rem);
-    }
-    to {
-      opacity: 1;
-      transform: none;
-    }
-  }
-}
+  }}
 
 /* Content width used by every section. Phones: 20px side gutters (like most modern sites).
    Tablet up: Figma's 1200/1440 = 83.33%, capped at 1200px (scales via rem past 1440). */
