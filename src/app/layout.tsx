@@ -4,6 +4,7 @@ import Header from "@/components/ui/reusable/header";
 import Footer from "@/components/ui/reusable/footer";
 import JsonLd from "@/components/ui/reusable/jsonLd";
 import WhatsAppButton from "@/components/ui/reusable/whatsappButton";
+import Toaster from "@/components/ui/reusable/toaster";
 import { pageMetadata, siteConfig } from "@/lib/seo";
 import "./globals.css";
 
@@ -139,6 +140,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <main className="flex-1">{children}</main>
         <Footer />
         <WhatsAppButton />
+        <Toaster />
       </body>
     </html>
   );

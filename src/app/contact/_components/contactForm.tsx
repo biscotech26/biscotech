@@ -15,7 +15,7 @@ import {
   labelClass,
   services,
 } from "@/components/ui/reusable/inquiry";
-import { HoneypotField, InquiryStatus, useInquiry } from "@/components/ui/reusable/useInquiry";
+import { HoneypotField, useInquiry } from "@/components/ui/reusable/useInquiry";
 
 // The white "Tell us about your project" card on the Contact page (Figma: 48px top/bottom,
 // 43px left, 34px between groups, fields in two 199px columns 14px apart).
@@ -23,7 +23,7 @@ export default function ContactForm() {
   const [service, setService] = useState("");
   const [estimate, setEstimate] = useState("");
   // Sends to the backend; clears the dropdowns once it's sent
-  const { status, sending, handleSubmit, dismiss } = useInquiry(() => {
+  const { sending, handleSubmit } = useInquiry(() => {
     setService("");
     setEstimate("");
   });
@@ -134,8 +134,6 @@ export default function ContactForm() {
         >
           {sending ? "Sending…" : "Prepare inquiry"}
         </Button>
-
-        <InquiryStatus status={status} onDismiss={dismiss} />
       </form>
     </div>
   );

@@ -16,13 +16,13 @@ import {
   labelClass,
   services,
 } from "@/components/ui/reusable/inquiry";
-import { HoneypotField, InquiryStatus, useInquiry } from "@/components/ui/reusable/useInquiry";
+import { HoneypotField, useInquiry } from "@/components/ui/reusable/useInquiry";
 
 export default function ContactUs() {
   const [service, setService] = useState("");
   const [estimate, setEstimate] = useState("");
   // Sends to the backend; clears the dropdowns once it's sent
-  const { status, sending, handleSubmit, dismiss } = useInquiry(() => {
+  const { sending, handleSubmit } = useInquiry(() => {
     setService("");
     setEstimate("");
   });
@@ -154,8 +154,6 @@ export default function ContactUs() {
           >
             {sending ? "Sending…" : "Prepare inquiry"}
           </Button>
-
-          <InquiryStatus status={status} onDismiss={dismiss} />
         </form>
       </div>
     </section>
