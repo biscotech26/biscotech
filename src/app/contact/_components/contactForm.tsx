@@ -1,5 +1,5 @@
 "use client";
-import { useState, type FormEvent } from "react";
+import { useState } from "react";
 import Typography from "@/components/ui/typography";
 import Input from "@/components/ui/input";
 import Select from "@/components/ui/select";
@@ -13,20 +13,20 @@ import {
   fieldClass,
   fieldContainer,
   labelClass,
-  openInquiryEmail,
   services,
 } from "@/components/ui/reusable/inquiry";
+import { HoneypotField, InquiryStatus, useInquiry } from "@/components/ui/reusable/useInquiry";
 
 // The white "Tell us about your project" card on the Contact page (Figma: 48px top/bottom,
 // 43px left, 34px between groups, fields in two 199px columns 14px apart).
 export default function ContactForm() {
   const [service, setService] = useState("");
   const [estimate, setEstimate] = useState("");
-
-  function handleSubmit(e: FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    openInquiryEmail(new FormData(e.currentTarget));
-  }
+  // Sends to the backend; clears the dropdowns once it's sent
+  const { status, sending, handleSubmit, dismiss } = useInquiry(() => {
+    setService("");
+    setEstimate("");
+  });
 
   return (
     // Laptop+: takes 48% of the row (≈ Figma's 579px at 1200px) so it also fits on smaller
@@ -34,8 +34,9 @@ export default function ContactForm() {
     <div className="w-full rounded-[1.25rem] border border-secondary-accent bg-cards-and-sections px-5 py-8 md:px-10 md:py-12 lg:w-[48%] lg:shrink-0 lg:pr-6 lg:pl-10.75">
       <form
         onSubmit={handleSubmit}
-        className="flex flex-col gap-6 md:gap-8.5 lg:max-w-106.25"
+        className="relative flex flex-col gap-6 md:gap-8.5 lg:max-w-106.25"
       >
+        <HoneypotField />
         <div className="flex flex-col gap-2 md:gap-3.5">
           <Typography variant="subHeading" as="h2" className="text-primary-brand">
             Tell us about your project
@@ -127,10 +128,14 @@ export default function ContactForm() {
         <Button
           type="submit"
           icon={<ArrowUpEnd />}
-          className="w-full border-primary-brand bg-primary-brand py-3.5 text-cards-and-sections md:py-4.5"
+          disabled={sending}
+          aria-busy={sending}
+          className="w-full border-primary-brand bg-primary-brand py-3.5 text-cards-and-sections disabled:cursor-wait disabled:opacity-70 md:py-4.5"
         >
-          Prepare inquiry
+          {sending ? "Sending…" : "Prepare inquiry"}
         </Button>
+
+        <InquiryStatus status={status} onDismiss={dismiss} />
       </form>
     </div>
   );

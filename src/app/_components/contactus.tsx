@@ -1,5 +1,5 @@
 "use client";
-import { useState, type FormEvent } from "react";
+import { useState } from "react";
 import Typography, { variantStyles } from "@/components/ui/typography";
 import Input from "@/components/ui/input";
 import Select from "@/components/ui/select";
@@ -14,19 +14,18 @@ import {
   fieldClass,
   fieldContainer,
   labelClass,
-  openInquiryEmail,
   services,
 } from "@/components/ui/reusable/inquiry";
+import { HoneypotField, InquiryStatus, useInquiry } from "@/components/ui/reusable/useInquiry";
 
 export default function ContactUs() {
   const [service, setService] = useState("");
   const [estimate, setEstimate] = useState("");
-
-  // No backend yet: "Prepare inquiry" opens the visitor's email app with the form filled in
-  function handleSubmit(e: FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    openInquiryEmail(new FormData(e.currentTarget));
-  }
+  // Sends to the backend; clears the dropdowns once it's sent
+  const { status, sending, handleSubmit, dismiss } = useInquiry(() => {
+    setService("");
+    setEstimate("");
+  });
 
   return (
     <section id="contact" className="scroll-mt-8 bg-main-background py-16 lg:py-24">
@@ -74,8 +73,9 @@ export default function ContactUs() {
         {/* Form */}
         <form
           onSubmit={handleSubmit}
-          className="flex w-full flex-col items-start gap-4.5 lg:w-161.5"
+          className="relative flex w-full flex-col items-start gap-4.5 lg:w-161.5"
         >
+          <HoneypotField />
           <div className="grid w-full grid-cols-1 gap-x-8 gap-y-4.5 sm:grid-cols-2">
             <Input
               name="name"
@@ -100,8 +100,10 @@ export default function ContactUs() {
             />
             <Select
               name="service"
-              label="What do you need?"
+              // Required by the backend
+              label="What do you need? *"
               placeholder="Website design & dev"
+              required
               value={service}
               onChange={(e) => setService(e.target.value)}
               // Placeholder shows in sage until something is picked, like the inputs
@@ -146,10 +148,14 @@ export default function ContactUs() {
           <Button
             type="submit"
             icon={<ArrowUpEnd />}
-            className="w-full border-primary-brand bg-primary-brand text-cards-and-sections sm:w-auto"
+            disabled={sending}
+            aria-busy={sending}
+            className="w-full border-primary-brand bg-primary-brand text-cards-and-sections disabled:cursor-wait disabled:opacity-70 sm:w-auto"
           >
-            Prepare inquiry
+            {sending ? "Sending…" : "Prepare inquiry"}
           </Button>
+
+          <InquiryStatus status={status} onDismiss={dismiss} />
         </form>
       </div>
     </section>
