@@ -8,6 +8,7 @@ import {
   SmartphoneIcon,
 } from "@/components/ui/reusable/svg";
 import { appDevelopment } from "./app-development";
+import { siteConfig } from "@/lib/seo";
 import { trainingModes, type TrainingMode } from "./fees";
 import { backEnd } from "./back-end";
 import { digitalMarketing } from "./digital-marketing";
@@ -261,15 +262,59 @@ export function getCourse(slug: string) {
   return courses.find((course) => course.slug === slug);
 }
 
-/** The price part of a course's structured data: one offer per way of taking it */
+/** "12 weeks" → "P12W"; for a range like "16–20 weeks", the shortest */
+function isoWeeks(duration: string) {
+  const weeks = duration.match(/\d+/)?.[0];
+  return weeks ? `P${weeks}W` : undefined;
+}
+
+/** The course's Google data beyond its name: one offer per way of taking it (each linking to
+ *  the registration form), its length, and that it runs in person and online (Executive:
+ *  one-on-one, either way). Google uses the
+ *  offers and course instances for its course listings. */
 export function courseOffer(course: Course) {
+  const register = `${siteConfig.url}/academy/register?course=${course.slug}`;
+  const duration = isoWeeks(course.duration);
   return {
+    ...(duration && { timeRequired: duration }),
     offers: trainingModes.map((mode) => ({
       "@type": "Offer",
       name: mode.label,
       category: "Paid",
       price: String(course.fees[mode.id]),
       priceCurrency: "NGN",
+      availability: "https://schema.org/InStock",
+      url: register,
     })),
+    hasCourseInstance: [
+      {
+        "@type": "CourseInstance",
+        courseMode: "Onsite",
+        location: {
+          "@type": "Place",
+          name: "BiscoTech Academy",
+          address: {
+            "@type": "PostalAddress",
+            streetAddress: siteConfig.address.street,
+            addressLocality: siteConfig.address.city,
+            addressRegion: siteConfig.address.state,
+            addressCountry: siteConfig.address.countryCode,
+          },
+        },
+        ...(duration && { courseSchedule: { "@type": "Schedule", duration, repeatFrequency: "P1W" } }),
+      },
+      {
+        "@type": "CourseInstance",
+        courseMode: "Online",
+        ...(duration && { courseSchedule: { "@type": "Schedule", duration, repeatFrequency: "P1W" } }),
+      },
+      // Executive training: one-on-one, taken online or at the academy
+      {
+        "@type": "CourseInstance",
+        name: "Executive training (one-on-one)",
+        courseMode: ["Online", "Onsite"],
+        ...(duration && { courseSchedule: { "@type": "Schedule", duration, repeatFrequency: "P1W" } }),
+      },
+    ],
   };
 }

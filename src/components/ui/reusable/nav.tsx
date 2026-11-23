@@ -231,6 +231,18 @@ function AcademyMenu({
               <ArrowUpEnd className="size-4 text-light-teal" />
             </Link>
           </li>
+          <li>
+            <Link
+              href="/academy/register"
+              onClick={close}
+              className="flex items-center justify-between rounded-[0.5rem] px-3 py-2.5 transition-colors duration-200 hover:bg-secondary-accent/50"
+            >
+              <Typography variant="primaryButton" as="span" className="text-light-teal">
+                Register for a course
+              </Typography>
+              <ArrowUpEnd className="size-4 text-light-teal" />
+            </Link>
+          </li>
         </ul>
       </div>
     </div>
@@ -384,6 +396,17 @@ export function MobileMenu({ courses }: { courses: NavCourse[] }) {
                         </li>
                       );
                     })}
+                    <li>
+                      <Link
+                        href="/academy/register"
+                        onClick={() => setOpen(false)}
+                        className="block rounded-[0.5rem] px-3 py-2.5 transition-colors duration-200 hover:bg-secondary-accent/50"
+                      >
+                        <Typography variant="primaryButton" as="span" className="text-light-teal">
+                          Register for a course
+                        </Typography>
+                      </Link>
+                    </li>
                   </ul>
                 )}
               </div>

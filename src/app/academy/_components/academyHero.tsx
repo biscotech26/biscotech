@@ -37,8 +37,9 @@ export default function AcademyHero() {
               <Button href="#courses" icon={<ArrowUpEnd />} className="shrink-0 border-0 bg-primary-brand text-cards-and-sections w-full sm:w-auto">
                 Explore course packages
               </Button>
+              {/* Opens the registration form */}
               <Button
-                href="/contact"
+                href="/academy/register"
                 className="shrink-0 border-0 bg-primary-brand text-cards-and-sections w-full border border-primary-brand bg-transparent text-text-charcoal hover:bg-primary-brand hover:text-cards-and-sections sm:w-auto"
               >
                 Register your interest

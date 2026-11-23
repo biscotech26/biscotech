@@ -5,7 +5,12 @@
 export const trainingModes = [
   { id: "physical", label: "Physical training", short: "Physical", description: "Attend in person at our academy" },
   { id: "online", label: "Online training", short: "Online", description: "Learn remotely from anywhere" },
-  { id: "executive", label: "Executive training", short: "Executive", description: "Our premium training option" },
+  {
+    id: "executive",
+    label: "Executive training",
+    short: "Executive",
+    description: "One-on-one training, online or physical",
+  },
 ] as const;
 
 export type TrainingMode = (typeof trainingModes)[number]["id"];
